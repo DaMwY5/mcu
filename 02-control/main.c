@@ -44,15 +44,29 @@ void led_blink_set_period_ms_callback(const char *args)
     }
 }
 
+void help(const char *args){
+    printf("Доступные команды:\n");
+    
+    printf("version - get device name and firmware version\n");
+    printf("on - led on\n");
+    printf("off - led off\n");
+    printf("blink - led blink\n");
+    printf("l - led_blink_set_period_ms\n");
+}
+
+
 api_t device_api[] =
     {
         {"version", version_callback, "get device name and firmware version"},
         {"on", led_on_callback, "led on"},
         {"off", led_off_callback, "led off"},
         {"blink", led_blink_callback, "led blink"},
-        {"l", led_blink_set_period_ms_callback, "led blink"},
+        {"l", led_blink_set_period_ms_callback, "led_blink_set_period_ms"},
+        {"help", help, ""},
         {NULL, NULL, NULL},
 };
+
+
 
 int main()
 {
