@@ -32,6 +32,17 @@ void led_blink_callback(const char *args)
     led_task_state_set(state);
     printf("LED Blink\n");
 }
+void led_blink_set_period_ms_callback(const char *args)
+{
+    uint period_ms = 0;
+    sscanf(args, "%u", &period_ms);
+    if(period_ms == 0){
+        printf("Error\n");
+    }
+    else{
+        led_task_set_blink_period_ms(period_ms);
+    }
+}
 
 api_t device_api[] =
     {
@@ -39,6 +50,7 @@ api_t device_api[] =
         {"on", led_on_callback, "led on"},
         {"off", led_off_callback, "led off"},
         {"blink", led_blink_callback, "led blink"},
+        {"l", led_blink_set_period_ms_callback, "led blink"},
         {NULL, NULL, NULL},
 };
 

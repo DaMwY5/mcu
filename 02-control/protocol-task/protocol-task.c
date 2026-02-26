@@ -10,7 +10,16 @@ void protocol_task_init(api_t *device_api);
 void protocol_task_init(api_t *device_api)
 {
     api = device_api;
-    commands_count = sizeof(device_api);
+    int i = 0;
+    while(1){
+        if(device_api[i].command_name == NULL){
+            commands_count = i;
+            break;
+        }
+        else{
+            i += 1;
+        }
+    }
 }
 
 void protocol_task_handle(char *command_string)
@@ -41,7 +50,6 @@ void protocol_task_handle(char *command_string)
     {
         command_args = "";
     }
-
     // Добавляем вывод найденных имени команды и ее аргументов;
     // ваш код
 
